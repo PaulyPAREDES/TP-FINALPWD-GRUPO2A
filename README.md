@@ -1,6 +1,6 @@
-# 🤖 TP-FINALPWD-GRUPO2A
+# 🤖 TP-FINAL Programación Web Dinámica
 
-Grupo 2A- PAREDES Paulina - JOAQUIN IRIGOYEN
+Grupo 2A- PAREDES Paulina - Joaquin IRIGOYEN
 
 ## Objetivo del proyecto
 
@@ -32,9 +32,19 @@ PHP, MySQL, Ajax-JQuery, BootStrap, libreria GD-captcha .
 ## 🖥️ Previsualización
 
 ### Home Publico
+![Home](https://github.com/user-attachments/assets/437712af-9a72-4498-8519-f5caf5ef4ede)
+![home2](https://github.com/user-attachments/assets/c5e81517-ab6d-47a0-a85e-a6ea9784306b)
 
 ### Cliente
+![cliente](https://github.com/user-attachments/assets/3a5df842-2a88-4159-8f29-3802bbb7be69)
+![cliente2](https://github.com/user-attachments/assets/4e3ac4ec-c5a6-4dae-850b-95e0ae25166f)
 
 ### Deposito
+![Deposito](https://github.com/user-attachments/assets/1b69bf6c-fe30-4639-9537-a70e99babfd5)
 
 ### Administrador
+![administrador1](https://github.com/user-attachments/assets/024a4079-6424-4b9b-9a5e-2c5aad518242)
+![administrado2](https://github.com/user-attachments/assets/4db7172f-09b1-4dfe-8404-4e1cd3c93aff)
+
+### Configuracion
+![confiiguracion](https://github.com/user-attachments/assets/2136be04-154e-4b5f-9534-f724cfbb7fab)
