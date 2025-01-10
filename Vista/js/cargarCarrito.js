@@ -1,8 +1,6 @@
 $(document).ready(function() {
 
 $('#formProductos').submit( function(e) {//captura  el form del produccto por su id
-   /*console.log('enviando');
-   e.preventDefaul();*/
    const posData ={
     id:$('#id').val(),
     nombre: $('#nombre').val(),

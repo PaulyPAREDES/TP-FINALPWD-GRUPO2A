@@ -1,15 +1,11 @@
 <?php
-    include_once '../../../configuracion.php';
-    $datos = data_submitted();
+include_once '../../../configuracion.php';
+$datos = data_submitted();
 
-    $objRol= new AbmRol();
-        
-    if($objRol->modificar($datos)){
-        //echo "modifico";
-    header('Location: ../listarRol.php');
+$objRol = new AbmRol();
 
-    } else {
-      header('Location: ../gestionMenu.php');
-    //  echo " no modifico";
-    }
-?>
+if ($objRol->modificar($datos)) {
+  header('Location: ../listarRol.php');
+} else {
+  header('Location: ../gestionMenu.php');
+}

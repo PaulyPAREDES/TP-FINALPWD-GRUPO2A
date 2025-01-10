@@ -3,18 +3,13 @@ include_once '../../../configuracion.php';
 
 // Encapsulo los datos para crear usuario nuevo
 $datos = data_submitted();
-//verEstructura($datos);
 
 $objRol = new AbmRol();
 $exito = $objRol->alta($datos);
 
-if($exito){
-
+if ($exito) {
     echo "Rol Creado";
-    header ('Location: ../listarRoles.php');
-
-}else{
+    header('Location: ../listarRoles.php');
+} else {
     echo "Rol NO Creado";
 }
-
-?>

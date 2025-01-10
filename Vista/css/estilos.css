@@ -72,6 +72,11 @@ body {
     /*align-items: center; */
 }
 
+.nav-link.active {
+    font-weight: bold;
+    color: #fff; 
+}
+
 .navbar-collapse a {
     padding: 5px;
     font-family: 'Titillium_Web', sans-serif;
@@ -147,7 +152,7 @@ body {
 
 /* -------------------- DECORACIONES/DETALLES -------------------- */
 a:hover {
-    border-bottom: solid 1px rgb(73, 73, 73);
+    border-bottom: solid 1px rgb(108, 106, 106);
 }
 
 .logo-nav img {
@@ -187,6 +192,7 @@ a:hover {
     padding: 50px;
 }
 
+
 /* -------------------- Modal crear cuenta e iniciar sesion-------------------- */
 .modal-title {
     text-align: center;
@@ -223,7 +229,7 @@ outline: none;
 color: rgb(49, 49, 49);
 }
 .ingresar {
-background: #222A3F;
+background: #171a23;
 padding: 10px;
 font-size: 16px;
 font-weight: 700!important;
@@ -252,6 +258,7 @@ text-decoration-line: none;
 cursor: pointer;
 }
 .btn-close{
+padding: 2px;
 position: absolute;
 top: 10px;
 right: 10px;

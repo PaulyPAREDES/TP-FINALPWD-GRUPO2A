@@ -10,16 +10,19 @@
             <div class="modal-body">
 
                 <div class="contenedor-dato">
-                    <p>Usuario: <span id="nombreUsuario"></span><p>
+                    <p>Usuario: <strong id="nombreUsuario"><?php echo $_SESSION['usnombre']; ?>
+                        </strong>
+                    </p>
                 </div>
                 <div class="contenedor-dato">
-                    <p>Mail: <span id="mailUsuario"></span><p>
+                    <p>Mail: <strong id="mailUsuario"><?php echo $_SESSION['usmail']; ?></strong>
+                    </p>
                 </div>
-                
+
                 <hr class="modal-divider">
 
                 <form name="formConfiguracionCuenta" id="formConfiguracionCuenta" method="POST" class="needs-validation" novalidate>
-                    
+
                     <div class="contenedor-dato">
                         <label for="uspass" class="form-label">Ingrese su nuevo nombre de usuario</label>
                         <input type="text" class="form-control" id="usnombre" name="usnombre">

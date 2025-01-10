@@ -15,7 +15,7 @@ $abmCompra->finalizarCompra($arregloProductos , $idUsuario);
 
 if($abmCompra ){
   echo "<script>alert('Compra iniciada');</script>";
-  header ('Location: ../homeCliente.php');
+  header ('Location: ../misCompras.php');
 }else{
   echo "<script>alert('Hubo un error');</script>";
 }

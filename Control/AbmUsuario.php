@@ -36,7 +36,7 @@ class AbmUsuario
         if (isset($param['idusuario'])) {
             $obj = new Usuario();
             $obj->setear($param['idusuario'], null, null, null, null);
-           // $obj->cargar();
+            // $obj->cargar();
         }
         return $obj;
     }
@@ -49,10 +49,10 @@ class AbmUsuario
     private function seteadosCamposClaves($param)
     {
         $resp = false;
-        if (isset($param['idusuario'])){
+        if (isset($param['idusuario'])) {
             $resp = true;
         }
-        
+
         return $resp;
     }
 
@@ -66,7 +66,7 @@ class AbmUsuario
     {
         $resp = false;
         $param['idusuario'] = null;
-     
+
         $objUsuario = $this->cargarObjeto($param);
         if ($objUsuario != null && $objUsuario->insertar()) {
             $resp = true;
@@ -96,13 +96,14 @@ class AbmUsuario
      * @param array $param
      * @return boolean
      */
-    public function modificar($param){
-    
+    public function modificar($param)
+    {
+
         $respuesta = false;
         if ($this->seteadosCamposClaves($param)) {
 
             $objUsuario = $this->cargarObjeto($param);
-            
+
             if ($objUsuario != null and $objUsuario->modificar()) {
                 $respuesta = true;
             }
@@ -165,18 +166,18 @@ class AbmUsuario
      */
     public function buscar($param)
     {
-        $where = " true";
+        $where = " true ";
         if ($param <> null) {
             if (isset($param['idusuario']))
-                $where .= " and idusuario = " . $param['idusuario'];
+                $where .= " and idusuario ='" . $param['idusuario'] . "'";
             if (isset($param['usnombre']))
                 $where .= " and usnombre = '" . $param['usnombre'] . "'";
             if (isset($param['uspass']))
-                $where .= " and uspass = '" . $param['uspass'] . "'";
+                $where .= " and uspass ='" . $param['uspass'] . "'";
             if (isset($param['usmail']))
-                $where .= " and usmail = '" . $param['usmail'] . "'";
+                $where .= " and usmail ='" . $param['usmail'] . "'";
             if (isset($param['usdeshabilitado']))
-                $where .= " and usdeshabilitado = '" . $param['usdeshabilitado'] . "'";
+                $where .= " and usdeshabilitado ='" . $param['usdeshabilitado'] . "'";
         }
 
         $obj = new Usuario();

@@ -1,13 +1,11 @@
 <?php
-    include_once '../../../configuracion.php';
-    $datos = data_submitted();
+include_once '../../../configuracion.php';
+$datos = data_submitted();
 
-    $objMenu = new AbmMenu();
-        
-    if($objMenu->modificar($datos)){
-      header('Location: ../gestionMenu.php');
+$objMenu = new AbmMenu();
 
-    } else {
-      header('Location: ../gestionMenu.php');
-    }
-?>
+if ($objMenu->modificar($datos)) {
+  header('Location: ../gestionMenu.php');
+} else {
+  header('Location: ../gestionMenu.php');
+}

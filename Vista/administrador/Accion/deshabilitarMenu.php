@@ -1,14 +1,13 @@
 <?php
-    include_once '../../../configuracion.php';
-    include_once '../../../Control/AbmMenu.php';
-    
-    $datos = data_submitted();
+include_once '../../../configuracion.php';
+include_once '../../../Control/AbmMenu.php';
 
-    $objMenu = new AbmMenu();
+$datos = data_submitted();
 
-    if($objMenu->borradoLogico($datos)){
-      header('Location: ../gestionMenu.php');
-    } else {
-      header('Location: ../gestionMenu.php');
-    }
-?>
+$objMenu = new AbmMenu();
+
+if ($objMenu->borradoLogico($datos)) {
+  header('Location: ../gestionMenu.php');
+} else {
+  header('Location: ../gestionMenu.php');
+}

@@ -1,4 +1,3 @@
-
 <!-- ____________________________________ NAV BAR 1 ________________________________ -->
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
@@ -13,22 +12,26 @@
             </div>
             <div class="collapse navbar-collapse menuUsuario" id="navbar-Toggler">
                 <ul class="navbar-nav d-flex justify-content-center align-items-center">
-                <?php
-                $objSession = new Session();
-               $listaMenu = $objSession->menuSegunRol();
-                 for ($i = 0; $i < count($listaMenu); $i++) {
-                    if ($listaMenu[$i]->getMeDeshabilitado() == null) {
+                    <?php
+                    $objSession = new Session();
+                    $listaMenu = $objSession->menuSegunRol();
+                    $currentPage = $_SERVER['REQUEST_URI'];
 
-                        /*lee los datos de los menues cargados*/
-                        $ruta = $listaMenu[$i]->getMeDescripcion();
-                        $nombre = $listaMenu[$i]->getMeNombre();
+                    for ($i = 0; $i < count($listaMenu); $i++) {
+                        if ($listaMenu[$i]->getMeDeshabilitado() == null) {
 
-                        if ($nombre == 'iconoCarrito') {/*espara que coloque el icono carrito*/
-                            $nombre = "<i class='bi bi-cart-plus-fill '></i>";
+                            /*lee los datos de los menues cargados*/
+                            $ruta = $listaMenu[$i]->getMeDescripcion();
+                            $nombre = $listaMenu[$i]->getMeNombre();
+
+                            if ($nombre == 'iconoCarrito') {/*espara que coloque el icono carrito*/
+                                $nombre = "<i class='bi bi-cart-plus-fill '></i>";
+                            }
+                            $active = strpos($currentPage, $ruta) !== false ? "active" : "";
+
+                            echo "<li class='nav-item mx-2 flex-grow-1'> <a class='nav-link $active' aria-current='page' href='$ruta'>$nombre</a> </li>"; // acomoda los menues en lista
                         }
-                        echo '<li class="nav-item mx-2 flex-grow-1"> <a class="nav-link" aria-current="page" href=' . $ruta . '>' . $nombre . '</a> </li>'; // acomoda los menues en lista
                     }
-                }
                     ?>
 
                     <ul class="nav menuUsuario2">
@@ -36,7 +39,7 @@
 
                             <a href="#" class="text-white text-decoration-none nav-link nav-item" data-bs-toggle="dropdown">
                                 <div>
-                                    <span id="nombreUsuarioCuenta"><?php echo $_SESSION['usnombre']?></span>
+                                    <span id="nombreUsuarioCuenta"><?php echo $_SESSION['usnombre'] ?></span>
                                     <i class="bi bi-person-fill fa-3x zoom-icon "></i>
                                     <i class="dropdown-toggle"></i>
                                 </div>
@@ -45,11 +48,11 @@
                             <ul class=" dropdown-menu dropdown-menu-down">
                                 <li><a class="text-black text-decoration-none " href=# data-bs-toggle="modal" data-bs-target="#modalConfiguracion" tabindex="-1">Configuración</a></li>
                                 <?php
-                                    if (count($_SESSION['colroles']) > 1){
-                                        echo "<li><a class='text-black text-decoration-none' href=# data-bs-toggle='modal' data-bs-target='#modalCambiarRol' tabindex='-1'>Cambiar Rol</a></li>";
-                                    }
+                                if (count($_SESSION['colroles']) > 1) {
+                                    echo "<li><a class='text-black text-decoration-none' href=# data-bs-toggle='modal' data-bs-target='#modalCambiarRol' tabindex='-1'>Cambiar Rol</a></li>";
+                                }
                                 ?>
-                                
+
                                 <hr class="dropdown-divider">
                                 <li><a class="text-black text-decoration-none " href="../opcionesCuenta/cerrarSession.php">Cerrar Sesion</a></li>
                             </ul>
@@ -61,8 +64,8 @@
     </div>
 </nav>
 <?php
-    include_once("../opcionesCuenta/configuracionCuenta.php");
-    if($_SESSION['colroles'] > 1){
-        include_once("../opcionesCuenta/cambiarRol.php"); 
-    }
+include_once("../opcionesCuenta/configuracionCuenta.php");
+if ($_SESSION['colroles'] > 1) {
+    include_once("../opcionesCuenta/cambiarRol.php");
+}
 ?>

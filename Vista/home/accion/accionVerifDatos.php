@@ -10,13 +10,13 @@ Nota: Hacer que al crear una cuenta, esta queda en la base de datos
 include_once("../../../configuracion.php");
 $datos = data_submitted();
 $objUsuario = new AbmUsuario();
-$exiteUsuario = $objUsuario->buscar($datos);
-if(count($exiteUsuario)>0){
+$existeUsuario = $objUsuario->buscar($datos);
+if(count($existeUsuario)>0){
     //por ahora solo se va a guardar en la base de datos
     if($exito = $objUsuario->alta($exiteUsuario)){
         echo "Registro existoso!";
     }else{
-        echo "Sucedio un Errosr al cargar el usuario";
+        echo "Sucedio un Error al cargar el usuario";
     }
 }else{
     

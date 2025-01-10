@@ -14,14 +14,12 @@ $objProduc = new AbmProducto();
 $tipoDeProduc = $texto;
 $param['tipo'] =  $tipoDeProduc;
 $listaProd = $objProduc->buscar($param);
-//print_r( $listaProd); 
 echo "<div class='contenido-pagina'>";
 echo "<div class='container'>";   
 echo "<div class='row '>";
 
 
 for ($i = 0; $i < count($listaProd); $i++) {
-    //$formId = "formProd" . $i; //
     echo "<div class='col'>";
     echo "<div class='p-3 d-flex justify-content-center align-items-center'>";
     echo "<div class='card text-center sombraCarta' style='width: 18rem;'>";

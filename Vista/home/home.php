@@ -16,7 +16,7 @@ include_once("../estructura/navInseguro.php");
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="../../Archivos/Imagenes/inicio1.png" class="d-block w-100" alt="...">
+                    <img src="../../Archivos/Imagenes/inicio1.png" class="d-block w-100 " alt="...">
                 </div>
                 <div class="carousel-item">
                     <img src="../../Archivos/Imagenes/inicio2.png" class="d-block w-100" alt="...">

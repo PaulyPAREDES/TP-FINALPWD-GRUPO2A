@@ -12,9 +12,6 @@ $usuario = $objUsuario->buscar($datos);
 $objUsuarioRol = new AbmUsuarioRol();
 $usuarioRol = $objUsuarioRol->buscar($datos);
 
-// $colUsuarioRol = $objUsuarioRol->buscar("");
-// $idUsuario['idusuario'] = $usuarioRol;
-
 $n = count($usuarioRol);
 
 ?>
@@ -22,7 +19,7 @@ $n = count($usuarioRol);
 <div class="container" style="padding: 50px;">
     <form name="actualizarUsuario" id="actualizarUsuario" method="POST" action="Accion/modificarRol.php"
         class="needs-validation" novalidate>
-        <h3>Usuario seleccionado</h3>
+        <h3 class="text-dark">Usuario seleccionado</h3>
         <br>
 
         <div class="contenedor-dato">
@@ -39,15 +36,15 @@ $n = count($usuarioRol);
 
         <div class="contenedor-dato">
             <h5>Roles actuales: <?php echo $n ?></h5>
-            <p><?php 
-            if ($n > 0){
-                foreach ($usuarioRol as $rol){
-                    echo $rol->getObjRol()->getRolDescripcion()." | ";
+            <p><?php
+                if ($n > 0) {
+                    foreach ($usuarioRol as $rol) {
+                        echo $rol->getObjRol()->getRolDescripcion() . " | ";
+                    }
+                } else {
+                    echo "Ningún rol asignado.";
                 }
-            } else {
-                echo "Ningún rol asignado.";
-            }
-            ?>
+                ?>
             </p>
         </div>
         <br>
@@ -64,14 +61,15 @@ $n = count($usuarioRol);
             <input type="checkbox" name="Cliente" value="Cliente">
             <br>
         </div>
-    
-        <div class="d-grid mb-3 gap-2">
+
+        <div class="d-grid gap-2  col-6 mx-auto">
             <input type="submit" value="Enviar" class="btn text-white  btn-dark"></input>
         </div>
     </form>
-    <a href="./listarUsuarios.php"><input type="submit" value="Cancelar" class="btn text- white btn-danger">
-        </input></a>
-
+    <div class="d-flex justify-content-end">
+        <a href="./listarUsuarios.php"><input type="submit" value="Cancelar" class="btn  my-4 text- white btn-danger">
+            </input></a>
+    </div>
 </div>
 
 <?php

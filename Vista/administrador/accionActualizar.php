@@ -1,27 +1,23 @@
 <?php
-    include_once '../../configuracion.php';
+include_once '../../configuracion.php';
 
-    $datos = data_submitted();
+$datos = data_submitted();
 
-    $objUsuario = new AbmUsuario();
+$objUsuario = new AbmUsuario();
 
-    $passEncriptada= md5($datos['uspass']);
-    $datos['uspass'] = $passEncriptada;
-    $datos['usdeshabilitado'] = null;
+$passEncriptada = md5($datos['uspass']);
+$datos['uspass'] = $passEncriptada;
+$datos['usdeshabilitado'] = null;
 
-    $param['idusuario'] = $datos['idusuario'];
+$param['idusuario'] = $datos['idusuario'];
 
-    $usuario = $objUsuario->buscar($param);
-    // print_r($usuario);
+$usuario = $objUsuario->buscar($param);
 
-    if (!empty($usuario)){
-        if ($objUsuario->modificar($datos)){
-            $_SESSION['usnombre'] = $datos['usnombre'];
-            //echo "si";
-            header ('Location: ../actInfoUsuarios/listarUsuarios.php?exito='.$datos['usnombre']);
-        }
-    } else {
-        //echo "no";
-        header ('Location: ../actInfoUsuarios/formActualizar.php?idusuario='.$datos['idusuario']);
+if (!empty($usuario)) {
+    if ($objUsuario->modificar($datos)) {
+        $_SESSION['usnombre'] = $datos['usnombre'];
+        header('Location: ../actInfoUsuarios/listarUsuarios.php?exito=' . $datos['usnombre']);
     }
-?>
+} else {
+    header('Location: ../actInfoUsuarios/formActualizar.php?idusuario=' . $datos['idusuario']);
+}

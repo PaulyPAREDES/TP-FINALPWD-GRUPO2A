@@ -1,184 +1,196 @@
 $(document).ready(function () {
+  $("#formCrearCuenta").validate({
+    rules: {
+      usnombreCrearCuenta: {
+        required: true,
+        //nombre            //valor que debe tener
+        nombreNoRepetido: { nombreNoRepetido: true },
+      },
+      usmailCrearCuenta: {
+        required: true,
+        mailValido: { mailValido: true },
+      },
+      captchaCrearCuenta: {
+        captchaCrearCuentaSinExpirar: { captchaCrearCuentaSinExpirar: true },
+        required: true,
+        captchaCrearCuentaCorrecto: { captchaCrearCuentaCorrecto: true },
+      },
+    },
+    messages: {
+      usnombreCrearCuenta: {
+        required: "Ingrese su usuario",
+      },
+      usmailCrearCuenta: {
+        required: "Ingrese su dirección de mail",
+      },
+      captchaCrearCuenta: {
+        required: "Complete el captcha",
+      },
+    },
+    errorElement: "span",
 
-    $("#formCrearCuenta").validate({
-        rules: {
-            usnombreCrearCuenta: {
-                required: true,
-                //nombre            //valor que debe tener
-                nombreNoRepetido: {nombreNoRepetido: true}
-            },
-            usmailCrearCuenta: {
-                required: true,
-                mailValido: {mailValido: true}
-            },
-            captchaCrearCuenta: {
-                captchaCrearCuentaSinExpirar: {captchaCrearCuentaSinExpirar: true},
-                required: true,
-                captchaCrearCuentaCorrecto: {captchaCrearCuentaCorrecto: true}
-            }
+    errorPlacement: function (error, element) {
+      error.addClass("invalid-feedback");
+      element.closest(".contenedor-dato").append(error);
+    },
+    highlight: function (element) {
+      $(element).addClass("is-invalid").removeClass("is-valid");
+    },
+    unhighlight: function (element) {
+      $(element).removeClass("is-invalid").addClass("is-valid");
+    },
+
+    submitHandler: function (form) {
+      var formData = $(form).serialize();
+
+      $.ajax({
+        url: "accion/crearCuenta.php",
+        type: "POST",
+        dataType: "json",
+        data: formData,
+        async: false,
+
+        complete: function (xhr, textStatus) {
+          //se llama cuando se recibe la respuesta (no importa si es error o éxito)
+          console.log("La respuesta regreso");
         },
-        messages: {
-            usnombreCrearCuenta: {
-                required: "Ingrese su usuario"
-            },
-            usmailCrearCuenta: {
-                required: "Ingrese su dirección de mail"
-            },
-            captchaCrearCuenta: {
-                required: "Complete el captcha"
-            }
+        success: function (respuesta, textStatus, xhr) {
+          //se llama cuando tiene éxito la respuesta
+          if (respuesta.resultado == "exito") {
+            console.log(
+              "El resultado de la consulta es: " + respuesta.resultado
+            );
+          } else {
+            console.log(respuesta.resultado);
+          }
+
+          $(form).find(".is-valid").removeClass("is-valid");
+          $("#formCrearCuenta")[0].reset();
+          $("#imgCaptchaCrearCuenta").attr(
+            "src",
+            "accion/captchaCrearCuenta.php?r=" + Math.random()
+          );
+          alert(respuesta.mensaje);
+          //$("#modalCrearCuenta").modal("hide");
         },
-        errorElement: "span",
-
-        errorPlacement: function (error, element) {
-            error.addClass("invalid-feedback");
-            element.closest(".contenedor-dato").append(error);
+        error: function (xhr, textStatus, errorThrown) {
+          //called when there is an error
+          console.error(
+            "Error en la solicitud Ajax: " + textStatus + " - " + errorThrown
+          );
+          console.log(xhr.responseText); //muestra en la consola del navegador todos los errores
         },
-        highlight: function (element) {
-            $(element).addClass("is-invalid").removeClass("is-valid");
-        },
-        unhighlight: function (element) {
-            $(element).removeClass("is-invalid").addClass("is-valid");
-        },
+      });
+    },
+  });
 
-        submitHandler: function(form){
-
-            var formData = $(form).serialize()
-            
-            $.ajax({ 
-                url: "../../Control/Ajax Antiguo/crearCuenta.php",
-                type: "POST",
-                dataType: "json",
-                data: formData,
-                async: false,
-
-                complete: function(xhr, textStatus) {
-                    //se llama cuando se recibe la respuesta (no importa si es error o éxito)
-                    console.log("La respuesta regreso");
-                },
-                success: function(respuesta, textStatus, xhr) {
-                    //se llama cuando tiene éxito la respuesta
-                    if (respuesta.resultado == "exito"){
-                        console.log("El resultado de la consulta es: " + respuesta.resultado);
-
-                    } else {
-                        console.log(respuesta.resultado);
-                    }
-
-                    $(form).find('.is-valid').removeClass('is-valid');
-                    $("#formCrearCuenta")[0].reset();
-                    $("#imgCaptchaCrearCuenta").attr("src", "../../Control/captchaCrearCuenta.php?r=" + Math.random());
-                    alert(respuesta.mensaje);
-                    //$("#modalCrearCuenta").modal("hide");
-
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    //called when there is an error
-                    console.error("Error en la solicitud Ajax: " + textStatus + " - " + errorThrown)
-                    console.log(xhr.responseText);//muestra en la consola del navegador todos los errores
-                }
-            });
-        }
-    });
-
-    $("#actualizarCaptchaCrearCuenta").on("click", function() {
-        $("#imgCaptchaCrearCuenta").attr("src", "../../Control/captchaCrearCuenta.php?r=" + Math.random());
-    });
+  $("#actualizarCaptchaCrearCuenta").on("click", function () {
+    $("#imgCaptchaCrearCuenta").attr(
+      "src",
+      "accion/captchaCrearCuenta.php?r=" + Math.random()
+    );
+  });
 });
 
-jQuery.validator.addMethod("nombreNoRepetido", function (value, element) {
+jQuery.validator.addMethod(
+  "nombreNoRepetido",
+  function (value, element) {
     return this.optional(element) || nombreNoRepetido(value);
-}, "Nombre de usuario en uso");
+  },
+  "Nombre de usuario en uso"
+);
 
-jQuery.validator.addMethod("mailValido", function (value, element) {
-    return this.optional(element) || (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value));
-}, "Mail ingresado no válido");
+jQuery.validator.addMethod(
+  "mailValido",
+  function (value, element) {
+    return (
+      this.optional(element) ||
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)
+    );
+  },
+  "Mail ingresado no válido"
+);
 
-jQuery.validator.addMethod("captchaCrearCuentaSinExpirar", function (value, element) {
+jQuery.validator.addMethod(
+  "captchaCrearCuentaSinExpirar",
+  function (value, element) {
     return this.optional(element) || captchaCrearCuentaSinExpirar(value);
-}, "El captcha ha expirado, por favor actualícelo");
+  },
+  "El captcha ha expirado, por favor actualícelo"
+);
 
-jQuery.validator.addMethod("captchaCrearCuentaCorrecto", function (value, element) {
+jQuery.validator.addMethod(
+  "captchaCrearCuentaCorrecto",
+  function (value, element) {
     return this.optional(element) || captchaCrearCuentaCorrecto(value);
-}, "El captcha ingresado es incorrecto");
+  },
+  "El captcha ingresado es incorrecto"
+);
 
+function nombreNoRepetido(value) {
+  var formData = { usnombreCrearCuenta: value }; //array en formato json. value es el dato recibido desde el formulario
+  var ruta = "accion/nombreNoRepetido.php";
+  var resultado = false;
 
-function nombreNoRepetido(value){
+  $.ajax({
+    url: ruta,
+    type: "POST",
+    data: formData,
+    dataType: "json",
+    async: false,
 
-    var formData = {'usnombreCrearCuenta': value};//array en formato json. value es el dato recibido desde el formulario
-    var ruta = "../../Control/Ajax Antiguo/nombreNoRepetido.php";
-    var resultado = false;
+    success: function (respuesta) {
+      if (respuesta.validacion == "exito") {
+        resultado = true;
+      }
+    },
+  });
 
-    $.ajax({
-
-        url: ruta,
-        type: "POST",
-        data: formData,
-        dataType: "json",
-        async: false,
-
-        success: function(respuesta) {
-
-            if (respuesta.validacion == "exito"){
-                resultado = true;
-            }
-        }
-
-    });
-
-    return resultado;
+  return resultado;
 }
 
-function captchaCrearCuentaSinExpirar(value){
+function captchaCrearCuentaSinExpirar(value) {
+  var formData = { captchaCrearCuenta: value };
+  var ruta = "accion/captchaCrearCuentaSinExpirar.php";
+  var resultado = false;
 
-    var formData = {'captchaCrearCuenta': value};
-    var ruta = "../../Control/Ajax Antiguo/captchaCrearCuentaSinExpirar.php";
-    var resultado = false;
-        
-    $.ajax({
+  $.ajax({
+    url: ruta,
+    type: "POST",
+    data: formData,
+    dataType: "json",
+    async: false,
 
-        url: ruta,
-        type: "POST",
-        data: formData,
-        dataType: "json",
-        async: false,
+    success: function (respuesta) {
+      if (respuesta.validacion == "exito") {
+        resultado = true;
+      }
+    },
+  });
 
-        success: function(respuesta) {
-
-            if (respuesta.validacion == "exito"){
-                resultado = true;
-            }
-        }
-
-    });
-
-    return resultado;
+  return resultado;
 }
 
-function captchaCrearCuentaCorrecto(value){
+function captchaCrearCuentaCorrecto(value) {
+  var formData = { captchaCrearCuenta: value };
+  var ruta = "accion/captchaCrearCuentaCorrecto.php";
+  var resultado = false;
 
-    var formData = {'captchaCrearCuenta': value};
-    var ruta = "../../Control/Ajax Antiguo/captchaCrearCuentaCorrecto.php";
-    var resultado = false;
-        
-    $.ajax({
+  $.ajax({
+    url: ruta,
+    type: "POST",
+    data: formData,
+    dataType: "json",
+    async: false,
 
-        url: ruta,
-        type: "POST",
-        data: formData,
-        dataType: "json",
-        async: false,
+    success: function (respuesta) {
+      if (respuesta.validacion == "exito") {
+        resultado = true;
+      }
+    },
+  });
 
-        success: function(respuesta) {
-
-            if (respuesta.validacion == "exito"){
-                resultado = true;
-            }
-        }
-
-    });
-
-    return resultado;
+  return resultado;
 }
 
 /*

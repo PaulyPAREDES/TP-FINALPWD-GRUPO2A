@@ -9,8 +9,8 @@
                     <img src="../../Archivos/Imagenes/logoNEGRO.png" alt="Logo de la empresa" width="110" class="logologin">
                 </div>
             </div>
-                <h5 class="modal-title ">Iniciar sesión</h5>
-                <div class="modal-body">
+            <h5 class="modal-title ">Iniciar sesión</h5>
+            <div class="modal-body">
 
                 <form name="formLogin" id="formLogin" method="POST" class="needs-validation" novalidate>
 
@@ -35,7 +35,7 @@
                     </div>
                     <br>
                     <div class="d-grid mb-3 gap-2">
-                        <button type="submit" id="botonLogin" class="btn btn-dark ingresar" name="botonLogin">INGRESAR</button>
+                        <button type="submit" id="botonLogin" class="btn btn-dark " name="botonLogin">INGRESAR</button>
                     </div>
 
                 </form>

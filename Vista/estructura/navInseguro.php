@@ -12,25 +12,26 @@
             </div>
             <div class="collapse navbar-collapse" id="navbar-Toggler">
                 <ul class="nav navbar-nav d-flex align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="home.php">Inicio</a>
-                    </li>
-                    <li class="nav-item mx-2 flex-grow-1">
-                        <a class="nav-link" href="mostrarProductos.php?nombre=Mates">Mates</a>
-                    </li>
-                    <li class="nav-item mx-2 flex-grow-1">
-                        <a class="nav-link" href="mostrarProductos.php?nombre=Yerbas">Yerbas</a>
-                    </li>
-                    <li class="nav-item mx-2 flex-grow-1">
-                        <a class="nav-link" href="mostrarProductos.php?nombre=Bombillas">Bombillas</a>
-                    </li>
-                    <li class="nav-item mx-2 flex-grow-1">
-                        <a class="nav-link" href="mostrarProductos.php?nombre=Termos">Termos</a>
-                    </li>
-                    <li class="nav-item mx-2 flex-grow-1">
-                        <a class="nav-link" href="mostrarProductos.php?nombre=SETS">Sets</a>
-                    </li>
-                    <li class="nav-item login logo mx-2 flex-grow-1">
+                    <?php
+                    $current_page = $_SERVER['REQUEST_URI'];
+                    $menu_items = [
+                        "home.php" => "Inicio",
+                        "mostrarProductos.php?nombre=Mates" => "Mates",
+                        "mostrarProductos.php?nombre=Yerbas" => "Yerbas",
+                        "mostrarProductos.php?nombre=Bombillas" => "Bombillas",
+                        "mostrarProductos.php?nombre=Termos" => "Termos",
+                        "mostrarProductos.php?nombre=SETS" => "Sets"
+                    ];
+
+                    foreach ($menu_items as $href => $label) {
+                        $active = strpos($current_page, $href) !== false ? "active" : "";
+                        echo "<li class='nav-item mx-2 flex-grow-1'>
+                                <a class='nav-link $active' href='$href'>$label</a>
+                              </li>";
+                    }
+                    ?>
+
+                    <li class="nav-item login logo mx-4 flex-grow-1">
                         <i class="bi bi-person-fill fa-3x zoom-icon " data-bs-toggle="modal" data-bs-target="#modalLogin" tabindex="-1"></i>
                     </li>
                 </ul>
@@ -41,5 +42,5 @@
 
 <?php
 include_once("login.php");
-include_once("crearCuenta.php"); 
+include_once("crearCuenta.php");
 ?>

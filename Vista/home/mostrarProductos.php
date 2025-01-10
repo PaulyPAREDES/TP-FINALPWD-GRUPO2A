@@ -33,7 +33,7 @@ for ($i = 0; $i < count($listaProd); $i++) {
     echo "<h5 class='card-title'>" . $listaProd[$i]->getProNombre() . "</h5>";
     echo "<p class='card-text'>Precio: $" . $listaProd[$i]->getProDetalle() . "</p>";
 ?>
-    <button type='button' class='btn' onclick='enviar( <?php echo $listaProd[$i]->getIdProducto() ?>)' data-bs-toggle="modal" data-bs-target="#exampleModal"><i class='bi bi-cart-plus-fill text-start'></i></button>
+    <i class='bi bi-cart-plus-fill text-start'  data-bs-toggle="modal" data-bs-target="#modalLogin" tabindex="-1"></i>
 
 <?php
     echo "</div>";
